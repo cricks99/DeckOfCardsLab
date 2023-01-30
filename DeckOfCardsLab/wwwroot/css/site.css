@@ -1,0 +1,73 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.fancy-checkbox-label > input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: inherit;
+}
+
+.fancy-checkbox-label {
+    font-weight: bold;
+    text-align: center;
+    color: lightseagreen;
+    cursor: pointer;
+}
+
+.fancy-checkbox:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+    background: transparent;
+    color: transparent;
+    border: 3px transparent #ddd;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.fancy-checkbox-label:hover > .fancy-checkbox:before,
+input:focus + .fancy-checkbox:before {
+    border-color: #bdbdff;
+}
+
+.fancy-checkbox-label:hover > input:not(:checked) + .fancy-checkbox:before {
+    color: #eee;
+}
+
+input:checked + .fancy-checkbox:before {
+    color: #fff;
+    background: #bdbdff;
+    border-color: #bdbdff;
+}
+
+.fancy-checkbox-img:before {
+    position: absolute;
+    margin: 3px;
+    line-height: normal;
+    display: inline-block;
+}
+
+input:checked + .fancy-checkbox-img + img {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px navy;
+    border-radius: 20px;
+}
+
+.cardimage {
+    width: 175px;
+}

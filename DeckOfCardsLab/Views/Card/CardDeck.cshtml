@@ -1,0 +1,75 @@
+﻿@model DeckOfCardsLab.Models.CardHandApi
+
+@{
+    ViewData["Title"] = "Deck of Cards";
+}
+
+<h1>Deck of Cards</h1>
+
+<div>
+    <hr />
+   
+    <dl class="row">
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.remaining)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.remaining)
+        </dd>
+
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.deck_id)
+        </dt>
+        <dd class= "col-sm-9">
+            @Html.DisplayFor(model => model.deck_id)
+        </dd>
+    </dl>
+
+    <h4>Select the cards you want to keep:</h4>
+    <br />
+ 
+    <form asp-action="CardDeck">
+        @if (Model.cards.Count() == 0)
+        {
+            <p>
+                <b>There are no cards left in the deck. Time to reshuffle!</b>
+            </p>
+        }
+        
+        @{
+            int i = 0;
+            string cardDescription = "";
+
+            foreach (var item in Model.cards)
+            {
+                cardDescription =
+                    $"{item.value[0].ToString().ToUpper()}{item.value.Substring(1).ToLower()} of " +
+                    $"{item.suit[0].ToString().ToUpper()}{item.suit.Substring(1).ToLower()}";
+
+                <label class="fancy-checkbox-label">
+                    <input asp-for="@Model.cards[i].code" type="hidden">
+                    <input asp-for="@Model.cards[i].Save" class="form-control" type="checkbox">
+                    <span class="fancy-checkbox fancy-checkbox-img"></span>
+                    <img class="cardimage" src="@Html.DisplayFor(modelItem => item.image)">
+                    <br>
+                    @cardDescription
+                </label>
+                
+                i++;
+            }
+        }
+        
+        <p>
+            <div class="form-group">
+                <input type="submit" value="Draw Again" class="btn btn-primary" />
+            </div>
+        </p>
+    </form>
+
+    Or you can:
+    <form asp-action="Reshuffle">
+        <div class="form-group">
+            <input type="submit" value="Reshuffle Deck" class="btn btn-secondary" />
+        </div>
+    </form>
+</div>
